@@ -29,7 +29,7 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'USERNAME', passwordVariable: 'TOKEN')]) {
-                    // Use triple single quotes to avoid interpolating sensitive data in Groovy
+                    // Use triple single quotes to avoid interpolating sensitive data in Groovy test
                     sh '''echo "$TOKEN" | docker login -u "$USERNAME" --password-stdin'''
                 }
             }
