@@ -1,0 +1,78 @@
+# Build artifacts
+bin/
+obj/
+out/
+
+# Visual Studio / Rider / IDE files
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.idea/
+*.dotCover
+
+# Rider IDE
+.idea/
+*.sln.iml
+
+# ASP.NET Core runtime / publish output
+publish/
+*.exe
+*.dll
+*.pdb
+*.log
+*.vspscc
+
+# NuGet packages
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+
+# ASP.NET temporary files
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.mdf
+*.ldf
+App_Data/
+
+# Node.js dependencies (if you have SPA frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Coverage & test results
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.trx
+
+# Visual Studio Code
+.vscode/
+.history/
+*.code-workspace
+
+# User secrets
+secrets.json
+*.secret.json
+
+# Docker files (optional, if you build Docker images)
+docker-compose.override.yml
+docker-compose.local.yml
