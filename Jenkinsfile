@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "chanoodev/helloworld:latest"
-        DOCKERHUB_CREDENTIALS = "dockerhub-pat"
+        DOCKERHUB_CREDENTIALS = "dockerhub-pat" // Jenkins credentials ID
     }
 
     stages {
@@ -16,7 +16,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    sh "docker build -t $DOCKER_IMAGE ./HelloWorld"
+                    sh 'docker build -t $DOCKER_IMAGE ./HelloWorld'
                 }
             }
         }
@@ -24,14 +24,15 @@ pipeline {
         stage('Login to Docker Hub') {
             steps {
                 withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'USERNAME', passwordVariable: 'TOKEN')]) {
-                    sh "echo $TOKEN | docker login -u $USERNAME --password-stdin"
+                    // Use triple single quotes to avoid interpolating sensitive data in Groovy
+                    sh '''echo "$TOKEN" | docker login -u "$USERNAME" --password-stdin'''
                 }
             }
         }
 
         stage('Push Docker Image') {
             steps {
-                sh "docker push $DOCKER_IMAGE"
+                sh 'docker push $DOCKER_IMAGE'
             }
         }
     }
