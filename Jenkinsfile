@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Build Docker image from HelloWorld folder
-                    docker build -t $DOCKER_IMAGE ./HelloWorld
+                    sh "docker build -t $DOCKER_IMAGE ./HelloWorld"
                 }
             }
         }
