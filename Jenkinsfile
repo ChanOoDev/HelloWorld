@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        // Define Docker image name and tag
-        DOCKER_IMAGE = "helloworld:latest"
+        DOCKER_IMAGE = "chanoodev/helloworld:latest"
+        DOCKERHUB_CREDENTIALS = "dockerhub-pat"
     }
 
     stages {
@@ -16,9 +16,22 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    // Build Docker image from HelloWorld folder
                     sh "docker build -t $DOCKER_IMAGE ./HelloWorld"
                 }
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: "${DOCKERHUB_CREDENTIALS}", usernameVariable: 'USERNAME', passwordVariable: 'TOKEN')]) {
+                    sh "echo $TOKEN | docker login -u $USERNAME --password-stdin"
+                }
+            }
+        }
+
+        stage('Push Docker Image') {
+            steps {
+                sh "docker push $DOCKER_IMAGE"
             }
         }
     }
