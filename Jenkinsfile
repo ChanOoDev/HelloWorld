@@ -5,6 +5,11 @@ pipeline {
         DOCKER_IMAGE = "chanoodev/helloworld:latest"
         DOCKERHUB_CREDENTIALS = "dockerhub-pat" // Jenkins credentials ID
     }
+	
+	triggers {
+        githubPush() // Trigger pipeline on GitHub push
+    }
+
 
     stages {
         stage('Checkout') {
